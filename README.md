@@ -1,4 +1,4 @@
-# node-db-migrate
+# node-42matters
 
 ## Table of Contents
 
@@ -23,32 +23,117 @@ npm install 42matters
 #### Usage
 
 ```javascript
-var M42 = require('42matters');
+const M42 = require('42matters');
+const GooglePlayStoreAPI = M42.GooglePlayStoreAPI;
+const AppleStoreAPI =  M42.AppleStoreAPI;
 ```
 
-> **NOTICE:** ```client``` methods support both `Promise/A+` and `callback` for convenience.
-Examples here are with `Promise/A+`, but feel free to use callbacks.
+> **NOTICE:** Class methods support both [Promise/A+](https://www.promisejs.org/) 
+and [callbacks] (https://docs.nodejitsu.com/articles/getting-started/control-flow/what-are-callbacks) 
+for convenience. Examples here are with `Promise/A+`, but feel free to use callbacks.
 
 
-##### Google API
+#### Google Play Store API
+
+
+##### Class variables
+
+API internal properties and references are accessible within the GooglePlayStoreAPI class.
+
+`GooglePlayStoreAPI` class has the following "static" variables:
+
+    * `endpoints` - Object, API endpoints.
+    * `countries` - Object, mapping between country codes and their names (e.g 'en' -> 'English').
+    * `languages` - Object, mapping between language codes and their names (e.g 'zh-cn' -> 'Chinese Simplified').
+    * `categories` - Object, mapping between categories and their names (e.g. 'NEWS_AND_MAGAZINES' -> 'News & Magazines').
+    * `charts` - Object, mapping between charts and their description (e.g. 'topgrossing' -> 'Top Grossing Apps'). 
+
+
+For example, in order to know which country codes are supported by the API we can 
+simply print `GooglePlayStoreAPI.countries`.
+
+
+```javascript
+> console.log(GooglePlayStoreAPI.countries);
+{
+    "US": "United States",
+    "AR": "Argentina",
+    "AU": "Australia",
+    "AT": "Austria",
+    "BE": "Belgium",
+    "BR": "Brazil",
+    "BG": "Bulgaria",
+    "CA": "Canada",
+    "CL": "Chile",
+    "CN": "China",
+    "CO": "Colombia",
+    "HR": "Croatia",
+    "CZ": "Czech Republic",
+    "DK": "Denmark",
+    "EG": "Egypt",
+    "EE": "Estonia",
+    "FI": "Finland",
+    "FR": "France",
+    "DE": "Germany",
+    "GR": "Greece",
+    "HK": "Hong Kong",
+    "HU": "Hungary",
+    "IN": "India",
+    "ID": "Indonesia",
+    "IL": "Israel",
+    "IT": "Italy",
+    "JP": "Japan",
+    "LV": "Latvia",
+    "LT": "Lithuania",
+    "MY": "Malaysia",
+    "MX": "Mexico",
+    "NL": "Netherlands",
+    "NZ": "New Zealand",
+    "NO": "Norway",
+    "PE": "Peru",
+    "PH": "Phillipines",
+    "PL": "Poland",
+    "PT": "Portugal",
+    "RO": "Romania",
+    "RU": "Russian Federation",
+    "SA": "Saudi Arabia",
+    "RS": "Serbia",
+    "SG": "Singapore",
+    "SK": "Slovakia",
+    "ZA": "South Africa",
+    "KR": "South Korea",
+    "ES": "Spain",
+    "SE": "Sweden",
+    "CH": "Switzerland",
+    "TW": "Taiwan",
+    "TH": "Thailand",
+    "TR": "Turkey",
+    "UA": "Ukraine",
+    "AE": "United Arab Emirates",
+    "GB": "United Kingdom",
+    "VN": "Vietnam"
+}
+```
+
+##### Constructor
 
 ```javascript
 
-var client = new M42.GoogleAPI({
+var playStore = new GooglePlayStoreAPI({
     accessToken: 'df792380fb4faaa06a27c45c79b35b2de72fdac1'     // mandatory
-    debug: true|false,                                          // optional
-    useCache: true|false                                        // optional
+    debug: true|false,                                          // optional, default is false.
+    useCache: true|false                                        // optional, default is false.
 });
 ```
 
-###### Lookup
+##### Lookup API
 
-Find an Android app that matches the specified package name and return full app details.
-See more details [here]("https://42matters.com/api/lookup").
+Find an android app that matches the specified package name and return full app details.
+See full API documentation [here]("https://42matters.com/api/lookup").
 
 ```javascript
 // Using a promise
-client.lookup('com.facebook.orca')
+playStore.lookup('com.facebook.orca')
     .then(function (res) {
         // `res` object should look like this:
         {
@@ -123,7 +208,7 @@ client.lookup('com.facebook.orca')
     });
 
 // Using a callback
-client.lookup('com.facebook.orca', function(err, res) {
+playStore.lookup('com.facebook.orca', function(err, res) {
     // ...
 });
 ```
@@ -135,15 +220,15 @@ client.lookup('com.facebook.orca', function(err, res) {
 * callback - optional. callback function.
 
 
-###### Search
+##### Search API
 
 Find Android apps that match a given full text query. 
-Searches are done against our index of Android apps and are ranked based on 42matters' algorithms, 
-which do not match the order on other stores such as Google Play Store.
-See more details [here] ("https://42matters.com/api/search"). 
+Searches are done against 42matters index of android apps and are ranked based on 42matters' algorithms, 
+which do not match the order on other stores such as Google Play Store. 
+See full API documentation [here] ("https://42matters.com/api/search"). 
 
 ```javascript
-client.search('arcade games')
+playStore.search('arcade games')
     .then(function (res) {
         console.log(res);
     });
@@ -158,15 +243,15 @@ client.search('arcade games')
 * fields - optional. output fields (e.g ['package_name']). Default is all.
 * callback - optional. callback function.
 
-###### Advanced Query
+##### Advanced Query API
 
-Run an advanced query with multiple filters and sorting for all available app parameters for Android app. 
+Run an advanced query with multiple filters and sorting for all available app parameters for android app. 
 Ideal for data analysis and market insights of the Google Play Store™.
-See more details [here]("https://42matters.com/api/advanced-query-api").
+See full API documentation [here]("https://42matters.com/api/advanced-query-api").
 
 ```javascript
 // Query
-client.query({
+playStore.query({
         "query": {
             "name": "Most Popular Apps",
             "platform": "android",
@@ -191,12 +276,12 @@ client.query({
 * fields - optional. output fields (e.g ['package_name']). Default is all.
 * callback - optional.
 
-###### Available
+##### Availability API
 
-Check in which countries an Android app is available.
+Check in which countries an android app is available.
 
 ```javascript
-client.available('com.facebook.orca')
+playStore.available('com.facebook.orca')
     .then(function(res) {
         // res should look like this:
         { 
@@ -268,7 +353,7 @@ client.available('com.facebook.orca')
               Output will consist of these countries only.
 * callback - optional.
 
-###### Top Google Play Charts
+##### Top Google Play Charts API
 
 Retrieve the top app charts on Google Play for a specific date and country. 
 Lists have up to 540 apps for 55 countries for a total of 6944 lists daily. 
@@ -276,7 +361,7 @@ See more details [here] (https://42matters.com/api/top-google-charts).
  
 ```javascript
 // Google top charts
-client.getTopGoogleChart('topgrossing')
+playStore.getTopGoogleChart('topgrossing')
     .then(function (chart) {
         chart = chart.appList;
         // do something with the chart
