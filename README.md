@@ -5,7 +5,18 @@
 - [Overview](#overview)
 - [Installation](#installation)
 - [Usage](#usage)
-    - [Google API](#google-api)
+- [Google Play Store API](#google-play-store-api)
+    - [Class Variables](#class-variables)
+    - [Constructor](#constructor)
+    - [Lookup API](#lookup-api)
+    - [Search API](#search-api)
+    - [Advanced Query API](#advanced-query-api)
+    - [Availability API](#availability-api)
+- [Apple Store API](#apple-store-api)
+    - [Constructor](#constructor-1)
+    - [Lookup API](#lookup-api-1)
+    - [Search API](#search-api-1)
+    - [Advanced Query API](#advanced-query-api-1)
 
 
 ## Overview
@@ -120,9 +131,9 @@ simply print `GooglePlayStoreAPI.countries`.
 ```javascript
 
 var playStore = new GooglePlayStoreAPI({
-    accessToken: 'df792380fb4faaa06a27c45c79b35b2de72fdac1'     // mandatory
-    debug: true|false,                                          // optional, default is false.
-    useCache: true|false                                        // optional, default is false.
+    accessToken: '42MATTERS_ACCESS_TOKEN'                 // mandatory
+    debug: true|false,                                    // optional, default is false.
+    useCache: true|false                                  // optional, default is false.
 });
 ```
 
@@ -235,7 +246,7 @@ playStore.search('arcade games')
 ```
 
 `search` receives the following arguments:
-* query - mandatory, query string for the search (e.g. 'arcade+games').
+* query - mandatory, query string for the search (e.g. 'arcade games').
 * include_desc - optional. whether or not to include description. default is true.
 * limit - optional. limit response items (1-50).
 * page - optional. page number (1 - max pages).
@@ -377,3 +388,202 @@ playStore.getTopGoogleChart('topgrossing')
 * fields - optional. output fields (e.g ['package_name']). Default is all.
 * callback - optional.
 
+
+#### Apple Store API
+
+##### Constructor
+
+```javascript
+
+var appleStore = new AppleStoreAPI({
+    accessToken: "42MATTERS_ACCESS_TOKEN",            // mandatory, 42matters access token
+    debug: true|false,                                // optional. default is false.
+    useCache: true|false                              // optional. default is false.
+});
+```
+
+##### Lookup API
+
+Returns iPhone and iPad applications that match a given iOS app track ID.
+See full API documentation [here] (https://42matters.com/api/ios/lookup).
+
+```javascript
+appleStore.lookup(343200656)
+    .then(function(res) {
+        // res should look like this:
+        { artistId: 298910979,
+          artistName: 'Rovio Entertainment Ltd',
+          artistViewUrl: 'http://itunes.apple.com/artist/rovio-entertainment-ltd/id298910979?uo=5',
+          artworkUrl100: 'http://is2.mzstatic.com/image/thumb/Purple69/v4/b1/e2/8d/b1e28d0d-810b-173a-2d97-6a472774c6ae/mzl.uulfrkla.png/175x175bb-85.jpg',
+          artworkUrl512: 'http://is2.mzstatic.com/image/thumb/Purple69/v4/b1/e2/8d/b1e28d0d-810b-173a-2d97-6a472774c6ae/mzl.uulfrkla.png/512x512bb-85.jpg',
+          artworkUrl60: 'http://is2.mzstatic.com/image/thumb/Purple69/v4/b1/e2/8d/b1e28d0d-810b-173a-2d97-6a472774c6ae/mzl.uulfrkla.png/100x100bb-85.jpg',
+          averageUserRating: 4.5,
+          averageUserRatingForCurrentVersion: 4,
+          bundleId: 'com.clickgamer.AngryBirds',
+          contentAdvisoryRating: '4+',
+          currency: 'USD',
+          description: 'Use the unique powers of the Angry Birds to destroy the greedy pigs\' defenses!  \n\nThe survival of the Angry Birds is at stake. Dish out revenge on the greedy pigs who stole their eggs. Use the unique powers of each bird to destroy the pigs’ defenses. Angry Birds features challenging physics-based gameplay and hours of replay value. Each level requires logic, skill and force to solve.  \n\nIf you get stuck in the game, you can purchase the Mighty Eagle! Mighty Eagle is a one-time in-app purchase in Angry Birds that gives unlimited use. This phenomenal creature will soar from the skies to wreak havoc and smash the pesky pigs into oblivion. There’s just one catch: you can only use the aid of Mighty Eagle to pass a level once per hour. Mighty Eagle also includes all new gameplay goals and achievements!  \n\nIn addition to the Mighty Eagle, Angry Birds now has power-ups! Boost your birds’ abilities and three-star levels to unlock secret content! Angry Birds now has the following amazing power-ups: Sling Scope for laser targeting, King Sling for maximum flinging power, Super Seeds to supersize your birds, and Birdquake to shake pigs’ defenses to the ground!  \n\nHAVING TROUBLE? Head over to https://support.rovio.com where you can browse FAQs or submit a request to our support flock!\n\n#1 IPHONE PAID APP in US, UK, Canada, Italy, Germany, Russia, Sweden, Denmark, Finland, Singapore, Poland, France, Netherlands, Malta, Greece, Austria, Australia, Turkey, UAE, Saudi Arabia, Israel, Belgium, Norway, Hungary, Malaysia, Luxembourg, Portugal, Czech Republic, Spain, Ireland, Romania, New Zealand, Latvia, Lithuania, Estonia, Nicaragua, Kazakhstan, Argentina, Bulgaria, Slovakia, Slovenia, Mauritius, Chile, Hong Kong, Pakistan, Taiwan, Colombia, Indonesia, Thailand, India, Kenya, Macedonia, Croatia, Macau, Paraguay, Peru, Armenia, Philippines, Vietnam, Jordan and Kuwait.   \n\n#1 IPHONE PAID GAME in more countries than we can count!\n\nTerms of Use: http://www.rovio.com/eula \nPrivacy Policy: http://www.rovio.com/privacy \n\nThis application may require internet connectivity and subsequent data transfer charges may apply.\n\n\nImportant Message for Parents\n\nThis game may include:\n- Direct links to social networking websites that are intended for an audience over the age of 13.\n- Direct links to the internet that can take players away from the game with the potential to browse any web page.\n- Advertising of Rovio products and also products from select partners.\n- The option to make in-app purchases. The bill payer should always be consulted beforehand.',
+          features: [ 'gameCenter' ],
+          fileSizeBytes: '71674372',
+          fileSizeBytesNumeric: 71674372,
+          formattedPrice: '0.99 USD',
+          genreIds: [ '6014', '6016', '7001', '7003' ],
+          genres: [ 'Games', 'Entertainment', 'Action', 'Arcade' ],
+          ipad: false,
+          ipadScreenshotUrls: [],
+          iphone: true,
+          isGameCenterEnabled: true,
+          isVppDeviceBasedLicensingEnabled: true,
+          languageCodesISO2A: [ 'EN', 'FR', 'DE', 'IT', 'JA', 'PT', 'RU', 'ZH', 'ES', 'ZH' ],
+          minimumOsVersion: '6.0',
+          price: 0.99,
+          primaryGenreId: 6014,
+          primaryGenreName: 'Games',
+          releaseDate: '2009-12-11T00:00:00+00:00',
+          releaseNotes: 'The #1 App of all time turns 6!\nJoin the celebration in 15 all-new levels in the BirdDay episode!',
+          screenshotUrls: 
+           [ 'http://a3.mzstatic.com/us/r30/Purple5/v4/bc/9f/44/bc9f4453-7031-d39f-1ba2-c64ac3662c93/screen480x480.jpeg',
+             'http://a1.mzstatic.com/us/r30/Purple69/v4/e9/d3/f6/e9d3f6f8-ac9e-2218-e069-9f5fac99daee/screen480x480.jpeg',
+             'http://a3.mzstatic.com/us/r30/Purple7/v4/7e/d5/8b/7ed58b94-dfbf-366a-f3f6-5a8f65e2fa94/screen480x480.jpeg',
+             'http://a3.mzstatic.com/us/r30/Purple5/v4/76/7a/f4/767af4a2-9471-ac84-f428-c1e0494d99d1/screen480x480.jpeg' ],
+          sellerName: 'Rovio Entertainment Ltd',
+          sellerUrl: 'http://www.angrybirds.com/',
+          supportedDevices: 
+           [ 'iPhone-3GS',
+             'iPhone4',
+             'iPodTouchFourthGen',
+             'iPad2Wifi',
+             'iPad23G',
+             'iPhone4S',
+             'iPadThirdGen',
+             'iPadThirdGen4G',
+             'iPhone5',
+             'iPodTouchFifthGen',
+             'iPadFourthGen',
+             'iPadFourthGen4G',
+             'iPadMini',
+             'iPadMini4G',
+             'iPhone5c',
+             'iPhone5s',
+             'iPhone6',
+             'iPhone6Plus',
+             'iPodTouchSixthGen' ],
+          trackCensoredName: 'Angry Birds',
+          trackContentRating: '4+',
+          trackId: 343200656,
+          trackViewUrl: 'http://itunes.apple.com/app/angry-birds/id343200656?uo=5&at=10l9yE',
+          userRatingCount: 822935,
+          userRatingCountForCurrentVersion: 802,
+          version: '6.0.1' 
+        }
+    });
+```
+
+`lookup` receives the following arguments:
+* id - mandatory, apple store ID (e.g. 343200656). number format.
+* lang  - optional, language code. (e.g 'en'). default is 'en'.
+* fields - optional. output fields (e.g ['artistId', 'artistName']). Default is all.
+* callback - optional. callback function.
+
+
+##### Search API
+
+Returns iPhone and iPad applications that match a given full text search query. 
+Search results are ranked based on 42matters' algorithms and do no match the order of the Apple App Store.
+
+```javascript
+appleStore.search("angry birds")
+    .then(function(res) {
+        // res would be:
+        { results: 
+           [{  
+               artistId: 298910979,
+               artistName: 'Rovio Entertainment Ltd',
+               artistViewUrl: 'http://itunes.apple.com/artist/rovio-entertainment-ltd/id298910979?uo=5',
+               artworkUrl100: 'http://is2.mzstatic.com/image/thumb/Purple69/v4/b1/e2/8d/b1e28d0d-810b-173a-2d97-6a472774c6ae/mzl.uulfrkla.png/175x175bb-85.jpg',
+               artworkUrl512: 'http://is2.mzstatic.com/image/thumb/Purple69/v4/b1/e2/8d/b1e28d0d-810b-173a-2d97-6a472774c6ae/mzl.uulfrkla.png/512x512bb-85.jpg',
+               artworkUrl60: 'http://is2.mzstatic.com/image/thumb/Purple69/v4/b1/e2/8d/b1e28d0d-810b-173a-2d97-6a472774c6ae/mzl.uulfrkla.png/100x100bb-85.jpg',
+               averageUserRating: 4.5,
+               averageUserRatingForCurrentVersion: 4,
+               bundleId: 'com.clickgamer.AngryBirds',
+               contentAdvisoryRating: '4+',
+               currency: 'USD',
+               description: 'Use the unique powers of the Angry Birds to destroy the greedy pigs\' defenses!  \n\nThe survival of the Angry Birds is at stake. Dish out revenge on the greedy pigs who stole their eggs. Use the unique powers of each bird to destroy the pigs’ defenses. Angry Birds features challenging physics-based gameplay and hours of replay value. Each level requires logic, skill and force to solve.  \n\nIf you get stuck in the game, you can purchase the Mighty Eagle! Mighty Eagle is a one-time in-app purchase in Angry Birds that gives unlimited use. This phenomenal creature will soar from the skies to wreak havoc and smash the pesky pigs into oblivion. There’s just one catch: you can only use the aid of Mighty Eagle to pass a level once per hour. Mighty Eagle also includes all new gameplay goals and achievements!  \n\nIn addition to the Mighty Eagle, Angry Birds now has power-ups! Boost your birds’ abilities and three-star levels to unlock secret content! Angry Birds now has the following amazing power-ups: Sling Scope for laser targeting, King Sling for maximum flinging power, Super Seeds to supersize your birds, and Birdquake to shake pigs’ defenses to the ground!  \n\nHAVING TROUBLE? Head over to https://support.rovio.com where you can browse FAQs or submit a request to our support flock!\n\n#1 IPHONE PAID APP in US, UK, Canada, Italy, Germany, Russia, Sweden, Denmark, Finland, Singapore, Poland, France, Netherlands, Malta, Greece, Austria, Australia, Turkey, UAE, Saudi Arabia, Israel, Belgium, Norway, Hungary, Malaysia, Luxembourg, Portugal, Czech Republic, Spain, Ireland, Romania, New Zealand, Latvia, Lithuania, Estonia, Nicaragua, Kazakhstan, Argentina, Bulgaria, Slovakia, Slovenia, Mauritius, Chile, Hong Kong, Pakistan, Taiwan, Colombia, Indonesia, Thailand, India, Kenya, Macedonia, Croatia, Macau, Paraguay, Peru, Armenia, Philippines, Vietnam, Jordan and Kuwait.   \n\n#1 IPHONE PAID GAME in more countries than we can count!\n\nTerms of Use: http://www.rovio.com/eula \nPrivacy Policy: http://www.rovio.com/privacy \n\nThis application may require internet connectivity and subsequent data transfer charges may apply.\n\n\nImportant Message for Parents\n\nThis game may include:\n- Direct links to social networking websites that are intended for an audience over the age of 13.\n- Direct links to the internet that can take players away from the game with the potential to browse any web page.\n- Advertising of Rovio products and also products from select partners.\n- The option to make in-app purchases. The bill payer should always be consulted beforehand.',
+               features: [Object],
+               fileSizeBytes: '71674372',
+               fileSizeBytesNumeric: 71674372,
+               formattedPrice: '0.99 USD',
+               genreIds: [Object],
+               genres: [Object],
+               ipad: false,
+               ipadScreenshotUrls: [],
+               iphone: true,
+               isGameCenterEnabled: true,
+               isVppDeviceBasedLicensingEnabled: true,
+               languageCodesISO2A: [Object],
+               minimumOsVersion: '6.0',
+               price: 0.99,
+               primaryGenreId: 6014,
+               primaryGenreName: 'Games',
+               releaseDate: '2009-12-11T00:00:00+00:00',
+               releaseNotes: 'The #1 App of all time turns 6!\nJoin the celebration in 15 all-new levels in the BirdDay episode!',
+               screenshotUrls: [Object],
+               sellerName: 'Rovio Entertainment Ltd',
+               sellerUrl: 'http://www.angrybirds.com/',
+               supportedDevices: [Object],
+               trackCensoredName: 'Angry Birds',
+               trackContentRating: '4+',
+               trackId: 343200656,
+               trackViewUrl: 'http://itunes.apple.com/app/angry-birds/id343200656?uo=5&at=10l9yE',
+               userRatingCount: 822935,
+               userRatingCountForCurrentVersion: 802,
+               version: '6.0.1'
+           }]
+        }
+    });
+```
+
+`search` receives the following arguments:
+* query - mandatory, query string for the search (e.g. 'angry birds').
+* include_desc - optional. whether or not to include description. default is true.
+* limit - optional. limit response items (1-50).
+* page - optional. page number (1 - max pages).
+* lang - optional, language code. (e.g 'en'). default is 'en'.
+* fields - optional. output fields (e.g ['artistId']). Default is all.
+* callback - optional. callback function.
+
+##### Advanced Query API
+
+Run an advanced query with multiple filters and sorting for all available app parameters for 
+iPhone and iPad apps. Ideal for data analysis and market insights of the Apple App Store™.
+See full API documentation [here](https://42matters.com/api/ios/advanced-query-api).
+
+```javascript
+
+// Get the top 10 most rated apps on Apple App Store
+var query = {
+    "query": {
+        "name": "Most Popular Apps",
+        "platform": "ios",
+        "query_params": {
+            "from": 0,
+            "num": 100,
+            "sort": "userRatingCount",
+            "sort_order": "desc"
+        }
+    }
+};
+
+appleStore.query(query)
+    .then(function (res) {
+        // do something with query result
+    });
+```
+
+`query` receives the following arguments:
+* query - mandatory. Query object. You can design your query JSON [here] (https://42matters.com/app-market-explorer/ios).
+* lang - optional, language code. (e.g 'en'). default is 'en'.
+* limit - optional. limit response items (1-100).
+* page - optional. page number (1 - max pages).
+* fields - optional. output fields (e.g ['package_name']). Default is all.
+* callback - optional.

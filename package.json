@@ -4,7 +4,7 @@
   "description": "Simple API Wrapper for 42matters written in Node.js",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/babel lib -d dist"
+    "build": "./node_modules/.bin/babel lib -d dist && sed 's/lib/dist/g' index.js > index.js.tmp && mv index.js.tmp index.js"
   },
   "repository": {
     "type": "git",
