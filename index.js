@@ -1,2 +1,2 @@
-module.exports.GooglePlayStoreAPI = require('./lib/playStore');
-module.exports.AppleStoreAPI = require('./lib/appleStore');
+module.exports.GooglePlayStoreAPI = require('./dist/playStore');
+module.exports.AppleStoreAPI = require('./dist/appleStore');
