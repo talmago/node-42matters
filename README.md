@@ -49,20 +49,17 @@ for convenience. Examples here are with `Promise/A+`, but feel free to use callb
 
 ##### Class variables
 
-API internal properties and references are accessible within the GooglePlayStoreAPI class.
+Internal API properties and references are accessible within the GooglePlayStoreAPI class.
 
-`GooglePlayStoreAPI` class has the following "static" variables:
+Class provides the following static variables:
+* endpoints: Object, API endpoints.
+* countries: Object, mapping between country codes and their names (e.g 'en' -> 'English').
+* languages: Object, mapping between language codes and their names (e.g 'zh-cn' -> 'Chinese Simplified').
+* categories: Object, mapping between categories and their names (e.g. 'NEWS_AND_MAGAZINES' -> 'News & Magazines').
+* charts: Object, mapping between charts and their description (e.g. 'topgrossing' -> 'Top Grossing Apps'). 
 
-    * `endpoints` - Object, API endpoints.
-    * `countries` - Object, mapping between country codes and their names (e.g 'en' -> 'English').
-    * `languages` - Object, mapping between language codes and their names (e.g 'zh-cn' -> 'Chinese Simplified').
-    * `categories` - Object, mapping between categories and their names (e.g. 'NEWS_AND_MAGAZINES' -> 'News & Magazines').
-    * `charts` - Object, mapping between charts and their description (e.g. 'topgrossing' -> 'Top Grossing Apps'). 
 
-
-For example, in order to know which country codes are supported by the API we can 
-simply print `GooglePlayStoreAPI.countries`.
-
+Example below prints the available country codes for Google Play Store API.
 
 ```javascript
 > console.log(GooglePlayStoreAPI.countries);
@@ -124,6 +121,7 @@ simply print `GooglePlayStoreAPI.countries`.
     "GB": "United Kingdom",
     "VN": "Vietnam"
 }
+
 ```
 
 ##### Constructor
