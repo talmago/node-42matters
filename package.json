@@ -1,6 +1,6 @@
 {
   "name": "42matters",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple API Wrapper for 42matters written in Node.js",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,6 @@
     "url": "https://github.com/talmago/node-42matters/issues"
   },
   "homepage": "https://github.com/talmago/node-42matters#readme",
-  "readmeFilename": "README.md",
   "engines": {
     "node": ">=0.11"
   },

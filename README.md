@@ -40,14 +40,14 @@ var AppleStoreAPI =  M42.AppleStoreAPI;
 ```
 
 > **NOTICE:** Class methods support both [Promise/A+](https://www.promisejs.org/) 
-and [callbacks] (https://docs.nodejitsu.com/articles/getting-started/control-flow/what-are-callbacks) 
-for convenience. Examples here are with `Promise/A+`, but feel free to use callbacks.
+and [callbacks](https://docs.nodejitsu.com/articles/getting-started/control-flow/what-are-callbacks) for convenience. 
+Examples here will use promises, but feel free to use callbacks.
 
 
 #### Google Play Store API
 
 
-##### Class variables
+###### Class variables
 
 Internal API properties and references are accessible within the GooglePlayStoreAPI class.
 
@@ -124,7 +124,7 @@ Example below prints the available country codes for Google Play Store API.
 
 ```
 
-##### Constructor
+###### Constructor
 
 ```javascript
 
@@ -135,10 +135,10 @@ var playStore = new GooglePlayStoreAPI({
 });
 ```
 
-##### Lookup API
+###### Lookup API
 
 Find an android app that matches the specified package name and return full app details.
-See full API documentation [here]("https://42matters.com/api/lookup").
+See full API documentation [here](https://42matters.com/api/lookup).
 
 ```javascript
 // Using a promise
@@ -232,7 +232,7 @@ playStore.lookup('com.facebook.orca', function(err, res) {
 * callback - optional. callback function.
 
 
-##### Search API
+###### Search API
 
 Find Android apps that match a given full text query. 
 Searches are done against 42matters index of android apps and are ranked based on 42matters' algorithms, 
@@ -256,7 +256,7 @@ playStore.search('arcade games')
 * callback - optional. callback function.
 
 
-##### Advanced Query API
+###### Advanced Query API
 
 Run an advanced query with multiple filters and sorting for all available app parameters for android app. 
 Ideal for data analysis and market insights of the Google Play Store™.
@@ -291,7 +291,7 @@ playStore.query({
 * callback - optional.
 
 
-##### Availability API
+###### Availability API
 
 Check in which countries an android app is available.
 
@@ -369,7 +369,7 @@ playStore.available('com.facebook.orca')
 * callback - optional.
 
 
-##### Top Google Play Charts API
+###### Top Google Play Charts API
 
 Retrieve the top app charts on Google Play for a specific date and country. 
 Lists have up to 540 apps for 55 countries for a total of 6944 lists daily. 
@@ -398,7 +398,7 @@ playStore.getTopGoogleChart('topgrossing')
 #### Apple Store API
 
 
-##### Constructor
+###### Constructor
 
 ```javascript
 
@@ -409,7 +409,7 @@ var appleStore = new AppleStoreAPI({
 });
 ```
 
-##### Lookup API
+###### Lookup API
 
 Returns iPhone and iPad applications that match a given iOS app track ID.
 See full API documentation [here] (https://42matters.com/api/ios/lookup).
@@ -497,7 +497,7 @@ appleStore.lookup(343200656)
 * callback - optional. callback function.
 
 
-##### Search API
+###### Search API
 
 Returns iPhone and iPad applications that match a given full text search query. 
 Search results are ranked based on 42matters' algorithms and do no match the order of the Apple App Store.
@@ -505,7 +505,7 @@ Search results are ranked based on 42matters' algorithms and do no match the ord
 ```javascript
 appleStore.search("angry birds")
     .then(function(res) {
-        // console.log(res);
+        console.log(res);
     });
 
 {
@@ -564,7 +564,7 @@ appleStore.search("angry birds")
 * fields - optional. output fields (e.g ['artistId']). Default is all.
 * callback - optional. callback function.
 
-##### Advanced Query API
+###### Advanced Query API
 
 Run an advanced query with multiple filters and sorting for all available app parameters for 
 iPhone and iPad apps. Ideal for data analysis and market insights of the Apple App Store™.
