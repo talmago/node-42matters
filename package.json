@@ -1,6 +1,6 @@
 {
   "name": "42matters",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple API Wrapper for 42matters written in Node.js",
   "main": "index.js",
   "scripts": {
